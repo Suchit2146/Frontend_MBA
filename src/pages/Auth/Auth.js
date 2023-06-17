@@ -1,6 +1,6 @@
 import { Field, Formik, Form, ErrorMessage } from "formik";
-import { formValidator } from '../validators/auth.form.validator';
-import { useAuth } from "../hooks/auth.hooks"
+import { formValidator } from "../../validators/auth.form.validator"
+import { useAuth } from "../../hooks/auth.hooks"
 
 function Auth() {
     const { initialStates, onLogin } = useAuth();
@@ -16,7 +16,7 @@ function Auth() {
                             onSubmit={onLogin}
                         >
                             {({ isSubmitting }) => (
-                                <form className="d-flex flex-column justify-content-center align-items-center">
+                                <Form className="d-flex flex-column justify-content-center align-items-center">
                                     <Field
                                         type="text"
                                         name="userId"
@@ -33,7 +33,7 @@ function Auth() {
                                     />
                                     <ErrorMessage name="password" component="div" />
                                     <button className="form-control m-2" type="submit" disabled={isSubmitting}>Submit</button>
-                                </form>
+                                </Form>
                             )}
                         </Formik>
                     </div>

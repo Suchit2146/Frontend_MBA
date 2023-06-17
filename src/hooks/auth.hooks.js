@@ -4,14 +4,18 @@ import signIn from "../api/auth.api"
 import { useNavigate } from "react-router-dom";
 
 export const useAuth = () => {
+    const navigate = useNavigate()
+    useEffect(() => {
+        redirect();
+    })
     const initialStates = {
         userId: "",
         password: ""
     }
-    const navigate = useNavigate()
     const redirect = () => {
         const userType = localStorage.getItem(USER_TYPES)
         const token = localStorage.getItem(TOKEN)
+        console.log(userType);
 
         if (!userType || !token) {
             return
@@ -27,14 +31,12 @@ export const useAuth = () => {
         }
     }
 
-    useEffect(() => {
-        redirect();
-    }, [])
-
-    const onLogin = async (values, { setSubmitting }) => {
+    const onLogin = async (values, props) => {
         const userDetails = { userId: values.userId, password: values.password }
         const loginResponse = await signIn(userDetails)
-        setSubmitting(false)
+        console.log(loginResponse);
+        props.setSubmitting(false);
+        props.setErrors({password:"Invalid Password"})
         redirect()
     }
 

@@ -2,11 +2,11 @@ import axios from "axios"
 
 const BASE_URL = process.env.REACT_APP_MBA_BACKEND_URL
 
- const signIn = async (user) => {
+const signIn = async (user) => {
     try {
         const response = await axios.post(`${BASE_URL}/mba/api/v1/auth/signin`, user)
-        const { name, email, userId, userTypes, status, accessToken } = response.data
-
+        const { name, email, userId, userTypes, accessToken } = response.data
+        // console.log(response.data);
         if (accessToken) {
             localStorage.setItem("name", name)
             localStorage.setItem("email", email)
@@ -16,8 +16,9 @@ const BASE_URL = process.env.REACT_APP_MBA_BACKEND_URL
         }
 
         return response.data;
+
     } catch (err) {
-        console.log(err);
+        // console.log(err);
         return err
     }
 }
